@@ -32,23 +32,18 @@ Reuses indexes for repeated Drive links (faster queries)
 
 Documents are loaded temporarily and discarded after session end
 
-🏗️ Architecture Overview
+🏗️ **Architecture Overview**
 
-Google Drive Link (File / Folder)
-        ↓
-
-Temporary Runtime Ingestion
-        ↓
-
-Semantic Embeddings (Sentence-Transformers)
-        ↓
-
-Vector Store Index (LlamaIndex)
-        ↓
-
-GPU-based Open-Source LLM (Mistral-7B, 4-bit)
-        ↓
-
+Google Drive Link (File / Folder)  
+⬇️  
+Temporary Runtime Ingestion  
+⬇️  
+Semantic Embeddings (Sentence-Transformers)  
+⬇️  
+Vector Store Index (LlamaIndex)  
+⬇️  
+GPU-based Open-Source LLM (Mistral-7B, 4-bit)  
+⬇️  
 Gradio Chatbot Interface
 
 🧠 Technologies Used
