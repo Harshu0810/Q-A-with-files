@@ -3,6 +3,7 @@
 A Retrieval-Augmented Generation (RAG) chatbot that answers questions from documents shared via public Google Drive links, using GPU-accelerated open-source LLMs on Google Colab.
 
 This project demonstrates end-to-end RAG system design, including document ingestion, semantic indexing, caching, and an interactive chatbot UI.
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/6d9d16cc-a508-4485-9256-0a2a5ffd712e" />
 
 🚀 Key Features
 
