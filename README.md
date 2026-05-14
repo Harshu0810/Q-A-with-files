@@ -1,80 +1,63 @@
-📄 Universal Drive RAG Chatbot (GPU-Accelerated)
+---
+title: RAG Document Chatbot
+emoji: 📄
+colorFrom: blue
+colorTo: purple
+sdk: docker
+app_file: app.py
+pinned: false
+---
 
-A Retrieval-Augmented Generation (RAG) chatbot that answers questions from documents shared via public Google Drive links, using GPU-accelerated open-source LLMs on Google Colab.
+# 📄 RAG Document Chatbot
 
-This project demonstrates end-to-end RAG system design, including document ingestion, semantic indexing, caching, and an interactive chatbot UI.
-<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/6d9d16cc-a508-4485-9256-0a2a5ffd712e" />
+A local-first Retrieval-Augmented Generation chatbot that answers questions about your documents using **LlamaIndex**, **Streamlit**, and open-source LLMs.
 
-🚀 Key Features
+## Features
 
-🔗 Universal Google Drive ingestion
+- **Document Q&A** — Ask natural language questions and get grounded answers
+- **Source Citations** — See exactly which pages informed each answer
+- **Dual Deployment** — Runs locally (Ollama) or on HuggingFace Spaces (HF Inference API)
+- **Fully Open Source** — No paid API keys required
 
-Accepts public Drive file or folder links
+## Quick Start (Local)
 
-Supports multiple files & nested folders
+1. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-⚡ GPU-accelerated inference
+2. **Pull a small Ollama model:**
+   ```bash
+   ollama pull qwen2.5:0.5b
+   ```
 
-Runs on Google Colab (free GPU, ~16GB RAM)
+3. **Place your PDFs** in the `data/` folder.
 
-🧠 Retrieval-Augmented Generation (RAG)
+4. **Build the search index:**
+   ```bash
+   python build_index.py
+   ```
 
-Semantic embeddings + vector search + LLM synthesis
+5. **Run the chatbot:**
+   ```bash
+   streamlit run app.py
+   ```
 
-💬 Interactive Gradio chatbot UI
+## Deploy to HuggingFace Spaces
 
-♻️ Index caching
+1. Create a new Space at [huggingface.co/new-space](https://huggingface.co/new-space) with **Streamlit** SDK.
+2. Push this repository to the Space.
+3. Add your `HF_TOKEN` as a **Secret** in Space Settings.
+4. The app will auto-detect the HF Spaces environment and use the HF Inference API.
 
-Reuses indexes for repeated Drive links (faster queries)
+## Configuration
 
-🔐 No OpenAI / No API keys required
+All settings are configurable via environment variables. See [`.env.example`](.env.example) for the full list.
 
-🧹 Ephemeral & privacy-safe
-
-Documents are loaded temporarily and discarded after session end
-
-🏗️ **Architecture Overview**
-
-Google Drive Link (File / Folder)  
-⬇️  
-Temporary Runtime Ingestion  
-⬇️  
-Semantic Embeddings (Sentence-Transformers)  
-⬇️  
-Vector Store Index (LlamaIndex)  
-⬇️  
-GPU-based Open-Source LLM (Mistral-7B, 4-bit)  
-⬇️  
-Gradio Chatbot Interface
-
-🧠 Technologies Used
-
-LlamaIndex – RAG orchestration & indexing
-
-Sentence-Transformers – Embeddings
-
-Hugging Face Transformers – Open-source LLMs
-
-BitsAndBytes – 4-bit quantization for GPU efficiency
-
-Gradio – Chatbot UI
-
-Google Colab – Free GPU runtime
-
-📂 Example Use Cases
-
-Research paper Q&A
-
-Study notes summarization
-
-Multi-PDF knowledge base chat
-
-Technical documentation assistant
-
-⚠️ Notes & Limitations
-
-Google Drive links must be publicly accessible (viewer access)
-
-Documents are temporarily downloaded into the Colab runtime
-
-Free Colab sessions reset after inactivity
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `HF_TOKEN` | — | HuggingFace API token (required for HF Spaces) |
+| `HF_MODEL` | `mistralai/Mistral-7B-Instruct-v0.3` | LLM model for HF Inference API |
+| `OLLAMA_MODEL` | `qwen2.5:0.5b` | Ollama model for local development |
+| `EMBED_MODEL` | `sentence-transformers/all-MiniLM-L6-v2` | Embedding model |
+| `CHUNK_SIZE` | `512` | Document chunk size for indexing |
